@@ -5,39 +5,30 @@
  */
 package wg.games.warp.levels;
 
-import com.badlogic.gdx.files.FileHandle;
-import java.io.Reader;
-
 /**
- * Contains levels.
+ * Contains levels. Campaign files contains metadata and paths to each level in
+ * the correct order. Data-only
  *
  * @author Walter
  */
 public class Campaign {
 
-    private final String name;
-    private final Level[] levelArray;
+    public String campaignName;
+
+    private final Level[] levels;
     private int current;
 
-    public Campaign(FileHandle file) {
-        name = file.nameWithoutExtension();
-        levelArray = loadLevels(file);
-        current = -1;
+    public Campaign(Level[] levels) {
+        this.levels = levels;
+        current = 0;
     }
 
-    private Level[] loadLevels(FileHandle file) {
-        Reader r = file.reader();
-
-        return new Level[1];
+    public boolean hasNext() {
+        return (current < levels.length);
     }
 
-    public Level nextLevel() {
-        current++;
-        if (current < 0 || current >= levelArray.length) {
-            return null;
-        } else {
-            return levelArray[current];
-        }
+    public Level next() {
+        return (hasNext() ? levels[current++] : null);
     }
 
 }

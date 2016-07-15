@@ -6,10 +6,10 @@
 package wg.games.warp.ai;
 
 /**
- *
+ * REMOVE THIS
  * @author Walter
  */
-public enum AIState {
+public enum AIActionState {
 
     /**
      * Null state.

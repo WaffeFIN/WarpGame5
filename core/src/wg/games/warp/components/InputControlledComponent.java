@@ -9,19 +9,8 @@ import com.artemis.Component;
 
 /**
  *
- * @author Walter
+ * @author waxwax
  */
-public class SizeComponent extends Component {
-
-    public float w = 64.0f;
-    public float h = 64.0f;
-
-    public SizeComponent() {
-    }
-
-    public SizeComponent(float w, float h) {
-        this.w = w;
-        this.h = h;
-    }
-
+public class InputControlledComponent extends Component {
+    //input type: local keyboard, local controller, local touchscreen, network
 }

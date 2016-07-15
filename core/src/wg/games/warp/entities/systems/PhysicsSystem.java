@@ -16,8 +16,8 @@ import wg.games.warp.components.PhysicsComponent;
  * @author Walter
  */
 public class PhysicsSystem extends IntervalSystem {
-    
-    private World engine; //Box2D
+
+    private final World engine;
 
     public PhysicsSystem(World engine) {
         super(Aspect.all(PhysicsComponent.class), WarpGame.PHYSICS_SYSTEM_INTERVAL / WarpGame.TICKRATE);

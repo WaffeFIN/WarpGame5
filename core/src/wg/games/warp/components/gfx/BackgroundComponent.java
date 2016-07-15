@@ -8,8 +8,10 @@ package wg.games.warp.components.gfx;
 import com.artemis.Component;
 
 /**
+ * Rendered before other renderable components. However, background HUD entities
+ * are rendered after foreground non-HUD entities.
  *
- * @author Walter
+ * @author waxwax
  */
-public class RenderableComponent extends Component {
+public class BackgroundComponent extends Component {
 }

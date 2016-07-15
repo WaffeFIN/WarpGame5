@@ -6,11 +6,10 @@
 package wg.games.warp.levels;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import java.io.InputStream;
 
 /**
- * Contains level data file and metadata file. Data-only class
+ * Contains level data file and metadata file. Metadata should be loaded on
+ * Level instance creation for the menu. Data-only class
  *
  * @author Walter
  */
@@ -20,26 +19,22 @@ public class Level {
 
     //METADATA
     public long levelVersion;
-    private long mapMakerVersion;
+    public long mapMakerVersion;
 
     public String levelName;
     public String authorName;
     public float bg_r;
     public float bg_g;
     public float bg_b;
-    public int initialState;
+    public int levelParam;
+    public int stateParam;
 
     public float[] parTimes;
     public int[] parPortals;
 
     public Level(FileHandle data) {
         this.data = data;
-        readMetaData();
-    }
-
-    private void readMetaData() {
         parTimes = new float[4];
         parPortals = new int[4];
     }
-
 }

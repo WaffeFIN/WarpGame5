@@ -9,7 +9,7 @@ import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.systems.IntervalIteratingSystem;
 import wg.games.warp.WarpGame;
-import wg.games.warp.components.AIComponent;
+import wg.games.warp.components.ai.AIComponent;
 
 /**
  *
@@ -25,17 +25,6 @@ public class AISystem extends IntervalIteratingSystem {
 
     @Override
     protected void process(int e) {
-        if (!isSleeping(e)) {
-            //do something
-        }
-    }
-
-    private boolean isSleeping(int e) {
-        AIComponent c = AIMapper.get(e);
-        if (c == null) {
-            return true;
-        }
-        return c.sleeping;
     }
 
 }

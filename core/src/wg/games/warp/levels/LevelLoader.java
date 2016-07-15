@@ -5,75 +5,62 @@
  */
 package wg.games.warp.levels;
 
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import java.io.IOException;
-import java.io.InputStream;
-import wg.games.warp.WarpGame;
+import java.io.Reader;
 
 /**
  * Handles campaigns and level loading.
  *
  * @author Walter
  */
-public class LevelManager {
-
-    private final WarpGame game;
+public class LevelLoader {
 
     private Campaign currentCampaign;
     private Level currentLevel;
     private Level nextLevel;
-
-    public LevelManager(WarpGame game) {
-        this.game = game;
-    }
 
     public void setCampaign(Campaign campaign) {
         if (campaign == null) {
             return;
         }
         currentCampaign = campaign;
-        nextLevel = campaign.nextLevel();
+        nextLevel = campaign.next();
     }
 
     public boolean loadLevel(Level level) {
-        InputStream stream;
-        try {
-            if ((stream = level.data.read()) == null) {
-                return false;
-            }
-        } catch (GdxRuntimeException ex) {
+        if (level == null || level.data == null || !level.data.exists()) {
             return false;
         }
+
         int b;
         try {
-            while ((b = stream.read()) != -1) {
+            Reader reader = level.data.reader();
+            while ((b = reader.read()) != -1) {
                 //read bytes
             }
-            stream.close();
-            return true;
-        } catch (IOException ex) {
+            reader.close();
+        } catch (Exception ex) {
             return false;
         }
+        //initialize level timers, variables
+        return true;
     }
 
-    public void nextLevel() {
+    public boolean loadNextLevel() {
         clearLevel();
-        if (nextLevel != null) {
-            currentLevel = nextLevel;
-            nextLevel = currentCampaign.nextLevel();
-            if (loadLevel(nextLevel)) {
-                return;
-            }
+        if (nextLevel == null) {
+            return false;
         }
-        //stop campaign
+        currentLevel = nextLevel;
+        nextLevel = currentCampaign.next();
+        return loadLevel(nextLevel);
     }
 
-    public void restartLevel() {
+    public boolean restartLevel() {
         clearLevel();
-        loadLevel(currentLevel);
+        return loadLevel(currentLevel);
     }
 
     public void clearLevel() {
-
+        //clear all current level entities
     }
 }

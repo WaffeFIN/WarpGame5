@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wg.games.warp.components.gfx;
-
-import com.artemis.Component;
+package wg.games.warp.entities.systems;
 
 /**
- *
- * @author Walter
+ * 
+ * @author waxwax
  */
-public class RenderableComponent extends Component {
+public class EntityInitializationSystem {
+    
 }

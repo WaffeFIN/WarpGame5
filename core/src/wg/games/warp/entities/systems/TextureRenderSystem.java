@@ -8,43 +8,46 @@ package wg.games.warp.entities.systems;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.systems.IteratingSystem;
-import wg.games.warp.components.VisibilityComponent;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import wg.games.warp.components.PositionComponent;
+import wg.games.warp.components.gfx.RenderableComponent;
+import wg.games.warp.components.SizeComponent;
+import wg.games.warp.components.gfx.TextureComponent;
 
 /**
  *
  * @author Walter
  */
-public class RenderSystem extends IteratingSystem {
+public class TextureRenderSystem extends IteratingSystem {
 
-    ComponentMapper<VisibilityComponent> visibilityMapper;
+    private ComponentMapper<TextureComponent> texMapper; //auto-injected
+    private ComponentMapper<PositionComponent> posMapper; //auto-injected
+    private ComponentMapper<SizeComponent> sizeMapper; //auto-injected
 
-    public RenderSystem() {
-        super(Aspect.all(VisibilityComponent.class));
+    private final SpriteBatch batch;
+
+    public TextureRenderSystem(SpriteBatch batch) {
+        super(Aspect.all(RenderableComponent.class, PositionComponent.class, SizeComponent.class, TextureComponent.class));
+        this.batch = batch;
     }
-    
+
     @Override
     protected void begin() {
-        //batch
+        batch.begin();
     }
 
     @Override
     protected void end() {
-        //batch
+        batch.end();
     }
 
     @Override
     protected void process(int e) {
-        if (isVisible(e)) {
-            //draw
-        }
-    }
-    
-    private boolean isVisible(int e) {
-        VisibilityComponent c = visibilityMapper.get(e);
-        if (c == null) {
-            return false;
-        }
-        return c.visible;
-    }
-}
+        TextureComponent tc = texMapper.get(e);
+        PositionComponent pc = posMapper.get(e);
+        SizeComponent sc = sizeMapper.get(e);
 
+        batch.draw(tc.texture, pc.x, pc.y, sc.w, sc.h);
+    }
+
+}

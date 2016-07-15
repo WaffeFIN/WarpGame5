@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wg.games.warp.components;
+package wg.games.warp.components.ai;
 
 import com.artemis.Component;
-import wg.games.warp.ai.AIState;
+import wg.games.warp.ai.AIActionState;
+import wg.games.warp.ai.AIMood;
 
 /**
  *
@@ -14,10 +15,6 @@ import wg.games.warp.ai.AIState;
  */
 public class AIComponent extends Component {
 
-    /**
-     * If sleeping is true, the AI is excluded from the AISystem's calculations.
-     * The state of the AI doesn't change if sleeping is set to true.
-     */
-    public boolean sleeping = false;
-    public AIState state = AIState.NULL;
+    public AIMood mood = AIMood.NULL;
+    public AIActionState state = AIActionState.NULL;
 }

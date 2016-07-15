@@ -9,7 +9,9 @@ import com.artemis.Component;
 
 /**
  *
- * @author Walter
+ * @author waxwax
  */
-public class RenderableComponent extends Component {
+public class LoadingBarComponent extends Component {
+
+    public float progress = 0.0f;
 }

@@ -6,18 +6,23 @@
 package wg.games.warp.entities.systems;
 
 import com.artemis.BaseSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.assets.AssetManager;
 
 /**
  *
- * @author Walter
+ * @author waxwax
  */
-public class ClearingRenderSystem extends BaseSystem {
-    
+public class AssetManagerSystem extends BaseSystem {
+
+    private final AssetManager manager;
+
+    public AssetManagerSystem(AssetManager manager) {
+        super();
+        this.manager = manager;
+    }
+
     @Override
     protected void processSystem() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        manager.update();
     }
 }

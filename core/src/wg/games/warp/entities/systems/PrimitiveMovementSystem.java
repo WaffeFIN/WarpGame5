@@ -20,8 +20,8 @@ import wg.games.warp.components.VelocityComponent;
  */
 public class PrimitiveMovementSystem extends IteratingSystem {
     
-    ComponentMapper<PositionComponent> positionMapper;
-    ComponentMapper<VelocityComponent> velocityMapper;
+    private ComponentMapper<PositionComponent> posMapper;
+    private ComponentMapper<VelocityComponent> velMapper;
 
     public PrimitiveMovementSystem() {
         super(Aspect.all(PositionComponent.class, VelocityComponent.class).exclude(PhysicsComponent.class));
@@ -29,8 +29,8 @@ public class PrimitiveMovementSystem extends IteratingSystem {
 
     @Override
     protected void process(int e) {
-        PositionComponent position = positionMapper.get(e);
-        VelocityComponent velocity = velocityMapper.get(e);
+        PositionComponent position = posMapper.get(e);
+        VelocityComponent velocity = velMapper.get(e);
 
         position.x += velocity.x * world.delta;
         position.y += velocity.y * world.delta;
