@@ -12,7 +12,7 @@ import wg.games.warp.WarpGame;
 import wg.games.warp.components.PhysicsComponent;
 
 /**
- *
+ * Does (only) physics engine step.
  * @author Walter
  */
 public class PhysicsSystem extends IntervalSystem {

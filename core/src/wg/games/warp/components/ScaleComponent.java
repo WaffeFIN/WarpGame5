@@ -9,9 +9,18 @@ import com.artemis.Component;
 
 /**
  *
- * @author waxwax
+ * @author Walter
  */
-public class InputControlledComponent extends Component {
+public class ScaleComponent extends Component {
 
-    public InputType type = InputType.KEYBOARD;
+    public float x = 1.0f;
+    public float y = 1.0f;
+
+    public ScaleComponent() {
+    }
+
+    public ScaleComponent(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
 }

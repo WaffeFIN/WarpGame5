@@ -10,8 +10,10 @@ import com.artemis.ComponentMapper;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import wg.games.warp.components.PositionComponent;
+import wg.games.warp.components.ScaleComponent;
 import wg.games.warp.components.gfx.RenderableComponent;
 import wg.games.warp.components.SizeComponent;
+import wg.games.warp.components.gfx.LoadingBarComponent;
 import wg.games.warp.components.gfx.TextureComponent;
 
 /**
@@ -20,9 +22,10 @@ import wg.games.warp.components.gfx.TextureComponent;
  */
 public class TextureRenderSystem extends IteratingSystem {
 
-    private ComponentMapper<TextureComponent> texMapper; //auto-injected
-    private ComponentMapper<PositionComponent> posMapper; //auto-injected
-    private ComponentMapper<SizeComponent> sizeMapper; //auto-injected
+    private ComponentMapper<TextureComponent> textureM; //auto-injected
+    private ComponentMapper<PositionComponent> positionM; //auto-injected
+    private ComponentMapper<SizeComponent> sizeM; //auto-injected
+    private ComponentMapper<ScaleComponent> scaleM; //auto-injected
 
     private final SpriteBatch batch;
 
@@ -43,11 +46,19 @@ public class TextureRenderSystem extends IteratingSystem {
 
     @Override
     protected void process(int e) {
-        TextureComponent tc = texMapper.get(e);
-        PositionComponent pc = posMapper.get(e);
-        SizeComponent sc = sizeMapper.get(e);
+        TextureComponent tc = textureM.get(e);
+        PositionComponent pc = positionM.get(e);
+        SizeComponent sc = sizeM.get(e);
 
-        batch.draw(tc.texture, pc.x, pc.y, sc.w, sc.h);
+        float xScale = 1.0f;
+        float yScale = 1.0f;
+        ScaleComponent scc = scaleM.get(e);
+        if (scc != null) {
+            xScale = scc.x;
+            yScale = scc.y;
+        }
+
+        batch.draw(tc.texture, pc.x, pc.y, sc.w * xScale, sc.h * yScale);
     }
 
 }

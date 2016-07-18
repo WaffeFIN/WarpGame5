@@ -13,18 +13,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
-import wg.games.warp.components.gfx.BackgroundComponent;
-import wg.games.warp.components.gfx.HUDComponent;
-import wg.games.warp.components.gfx.LoadingBarComponent;
-import wg.games.warp.components.PositionComponent;
-import wg.games.warp.components.gfx.RenderableComponent;
-import wg.games.warp.components.SizeComponent;
-import wg.games.warp.components.gfx.TextureComponent;
 import wg.games.warp.entities.archetypes.Archetypes;
 import wg.games.warp.entities.systems.*;
 
 /**
- * Does initialisation and disposing. Also handles pausing and resuming.
+ * Does initialization and disposing. Also handles pausing and resuming.
+ *
  * @author waxwax
  */
 public class WarpGame extends ApplicationAdapter {
@@ -50,12 +44,6 @@ public class WarpGame extends ApplicationAdapter {
     public static final int RELEASE_VERSION = 0;
     public static final int LATEST_MAPMAKER_VERSION = 0;
 
-    //Entity constants
-    private static final int LOADING_BAR_WIDTH = 256;
-    private static final int LOADING_BAR_HEIGHT = 13;
-    private static final int LOADING_BAR_EDGE = 2;
-    private static final int LOADING_BAR_Y_POSITION = 96;
-
     //Remember, statics are evil. Use only static final for constants
     /**
      * Box2D Physics engine.
@@ -72,9 +60,9 @@ public class WarpGame extends ApplicationAdapter {
      */
     private com.artemis.World world;
     /**
-     * Blueprints for default entities.
+     * Spawns entities on launch.
      */
-    private Archetypes archetypes;
+    private EntitySpawner spawner;
     private GameState state;
 
     @Override
@@ -96,51 +84,30 @@ public class WarpGame extends ApplicationAdapter {
 //        CameraInputController?
 
         initArtemis();
-        archetypes = new Archetypes(world);
+        spawner.setArchetypes(new Archetypes(world));
 
         System.out.println("...Done");
 
-        switchState(GameState.INTRO);
+        setState(GameState.INTRO);
+        spawner.createIntro();
     }
 
     private void initArtemis() {
+        spawner = new EntitySpawner(manager);
         WorldConfiguration config = new WorldConfigurationBuilder()
                 .with(
                         new AssetManagerSystem(manager),
+                        spawner,
                         new ClearingRenderSystem(),
                         new TextureRenderSystem(batch),
                         new TimerSystem(),
                         new LogicSystem(),
                         new AISystem(),
                         new PhysicsSystem(engine),
-                        new PrimitiveMovementSystem()
+                        new PrimitiveMovementSystem(),
+                        new LoadingBarSystem()
                 ).build();
         world = new com.artemis.World(config);
-    }
-
-    private void initIntro() {
-        //when loading bar reaches 100%, signal
-        world.createEntity().edit()
-                .add(new RenderableComponent())
-                .add(new HUDComponent())
-                .add(new BackgroundComponent())
-                .add(new PositionComponent(
-                        (VIEW_WIDTH - LOADING_BAR_WIDTH) / 2,
-                        LOADING_BAR_Y_POSITION))
-                .add(new SizeComponent(LOADING_BAR_WIDTH, LOADING_BAR_HEIGHT))
-                .add(new TextureComponent(manager.get("blank.png", Texture.class)));
-        world.createEntity().edit()
-                .add(new RenderableComponent())
-                .add(new HUDComponent())
-                .add(new PositionComponent(
-                        (VIEW_WIDTH - LOADING_BAR_WIDTH) / 2 + LOADING_BAR_EDGE,
-                        LOADING_BAR_Y_POSITION + LOADING_BAR_EDGE))
-                .add(new SizeComponent(
-                        LOADING_BAR_WIDTH - 2 * LOADING_BAR_EDGE,
-                        LOADING_BAR_HEIGHT - 2 * LOADING_BAR_EDGE))
-                .add(new TextureComponent(manager.get("blank.png", Texture.class)))
-                .add(new LoadingBarComponent());
-
     }
 
     @Override
@@ -192,9 +159,11 @@ public class WarpGame extends ApplicationAdapter {
     public void resume() {
     }
 
-    public void switchState(GameState gameState) {
+//    public GameState getState() {
+//        return state;
+//    }
+    public void setState(GameState gameState) {
         state = gameState;
         System.out.println("State switched to '" + state + "'");
-
     }
 }

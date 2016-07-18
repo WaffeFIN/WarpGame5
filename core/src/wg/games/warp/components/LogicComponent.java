@@ -8,9 +8,12 @@ package wg.games.warp.components;
 import com.artemis.Component;
 
 /**
+ * Required for updates from LogicSystem.
  *
  * @author Walter
  */
 public class LogicComponent extends Component {
-    
+
+    public LogicColor color = LogicColor.NONE;
+    public int colorAmount = 0;
 }

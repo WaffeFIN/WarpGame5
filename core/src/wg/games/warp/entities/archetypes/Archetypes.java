@@ -9,20 +9,32 @@ import com.artemis.Archetype;
 import com.artemis.ArchetypeBuilder;
 import com.artemis.World;
 import wg.games.warp.components.PositionComponent;
+import wg.games.warp.components.ScaleComponent;
 import wg.games.warp.components.gfx.RenderableComponent;
 import wg.games.warp.components.SizeComponent;
+import wg.games.warp.components.gfx.BackgroundComponent;
+import wg.games.warp.components.gfx.HUDComponent;
+import wg.games.warp.components.gfx.LoadingBarComponent;
 import wg.games.warp.components.gfx.TextureComponent;
 
 /**
  * Contains archetypes.
+ *
  * @author waxwax
  */
 public class Archetypes {
 
     /**
-     * p,s,rend,tex
+     * Default archetype. Used mostly as a building block for other archetypes.
      */
     public final Archetype def;
+    
+    /**
+     * Default + HUD.
+     */
+    public final Archetype hud;
+    public final Archetype hudBack;
+    public final Archetype hudLoadingBar;
 
     public Archetypes(World world) {
         def = new ArchetypeBuilder()
@@ -30,6 +42,16 @@ public class Archetypes {
                 .add(SizeComponent.class)
                 .add(RenderableComponent.class)
                 .add(TextureComponent.class)
+                .build(world);
+        hud = new ArchetypeBuilder(def)
+                .add(HUDComponent.class)
+                .build(world);
+        hudBack = new ArchetypeBuilder(hud)
+                .add(BackgroundComponent.class)
+                .build(world);
+        hudLoadingBar = new ArchetypeBuilder(hud)
+                .add(ScaleComponent.class)
+                .add(LoadingBarComponent.class)
                 .build(world);
     }
 

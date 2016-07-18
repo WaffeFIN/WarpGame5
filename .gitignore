@@ -60,11 +60,14 @@ nbactions.xml
 nb-configuration.xml
 
 ## Gradle
-
 .gradle
+.nb-gradle
+.gradle/
+.nb-gradle/
 gradle-app.setting
 build/
 
 ## OS Specific
 .DS_Store
 Thumbs.db
+
