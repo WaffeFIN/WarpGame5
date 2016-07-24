@@ -6,7 +6,7 @@
 package wg.games.warp.levels;
 
 import java.io.Reader;
-import wg.games.warp.entities.systems.EntitySpawner;
+import wg.games.warp.systems.EntityManager;
 
 /**
  * Handles campaigns and level loading.
@@ -18,7 +18,7 @@ public class LevelLoader {
     private Campaign currentCampaign;
     private Level currentLevel;
     private Level nextLevel;
-    private EntitySpawner spawner;
+    private EntityManager spawner;
 
     public void setCampaign(Campaign campaign) {
         if (campaign == null) {
