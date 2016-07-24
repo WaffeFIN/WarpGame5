@@ -15,5 +15,5 @@ public enum LogicColor {
     RED,
     GREEN,
     BLUE,
-    SECRET;
+    HIDDEN;
 }

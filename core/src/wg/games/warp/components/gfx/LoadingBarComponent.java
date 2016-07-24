@@ -6,13 +6,10 @@
 package wg.games.warp.components.gfx;
 
 import com.artemis.Component;
-import wg.games.warp.systems.GameState;
 
 /**
  *
  * @author waxwax
  */
 public class LoadingBarComponent extends Component {
-
-    public GameState nextState;
 }
