@@ -5,13 +5,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
-        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/components/signals/SignalComponent.java</file>
-        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/WarpGame.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/systems/spawning/DefaultDataMapper.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/systems/spawning/EntityManager.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/components/graphics/TextureComponent.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/systems/AssetManagerSystem.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/systems/render/RenderSystem.java</file>
       </group>
     </open-files>
     <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-      <group/>
+      <group>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/systems/spawning/DefaultDataMapper.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/systems/spawning/EntityManager.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/components/graphics/TextureComponent.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/systems/AssetManagerSystem.java</file>
+        <file>file:/D:/GitHub/WarpGame5/core/src/wg/games/warp/systems/render/RenderSystem.java</file>
+      </group>
     </open-files>
   </auxiliary>
 </gradle-project-properties>

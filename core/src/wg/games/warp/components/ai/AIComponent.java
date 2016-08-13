@@ -6,8 +6,6 @@
 package wg.games.warp.components.ai;
 
 import com.artemis.Component;
-import wg.games.warp.ai.AIActionState;
-import wg.games.warp.ai.AIMood;
 
 /**
  *

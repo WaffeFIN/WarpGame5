@@ -9,10 +9,8 @@ package wg.games.warp.systems;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.systems.IteratingSystem;
-import com.badlogic.gdx.assets.AssetManager;
-import wg.games.warp.components.signals.GameStateSignal;
 import wg.games.warp.components.ScaleComponent;
-import wg.games.warp.components.gfx.LoadingBarComponent;
+import wg.games.warp.components.graphics.LoadingBarComponent;
 
 /**
 
@@ -25,40 +23,32 @@ public class LoadingBarSystem extends IteratingSystem {
 
     private ComponentMapper<ScaleComponent> scaleM;
     private ComponentMapper<LoadingBarComponent> loadingBarM;
-    private ComponentMapper<GameStateSignal> gsSignalM;
 
-    private float loadingProgress;
-    private float displayProgress;
-    private float displayProgressDelta;
-    private final AssetManager assetManager;
-
-    public LoadingBarSystem(AssetManager assetManager) {
-        super(Aspect.all(LoadingBarComponent.class));
-        this.assetManager = assetManager;
-    }
-
-    @Override
-    protected void begin() {
-        loadingProgress = assetManager.getProgress();
-        displayProgressDelta = Math.max(displayProgressDelta, (loadingProgress - displayProgress));
-        if (loadingProgress < 1.0f) {
-            if (displayProgress < loadingProgress)
-                displayProgress += displayProgressDelta / FAST_SPEED_DIVISOR;
-            else
-                displayProgress += displayProgressDelta / SLOW_SPEED_DIVISOR;
-            if (displayProgress > 1.0f)
-                displayProgress = 1.0f;
-        } else
-            displayProgress = 1.0f;
+    public LoadingBarSystem() {
+        super(Aspect.all(LoadingBarComponent.class, ScaleComponent.class));
     }
 
     @Override
     protected void process(int e) {
-        ScaleComponent scc = scaleM.get(e);
-        if (scc != null)
-            scc.x = displayProgress;
-        if (displayProgress >= 1.0f && loadingProgress >= 1.0f) {
-            gsSignalM.create(world.create()).newState = GameState.MENU;
+        LoadingBarComponent loadingBarC = loadingBarM.get(e);
+
+        loadingBarC.displayProgressDelta = Math.max(loadingBarC.displayProgressDelta, (loadingBarC.loadingProgress - loadingBarC.displayProgress));
+        if (loadingBarC.loadingProgress < 1.0f) {
+            if (loadingBarC.displayProgress < loadingBarC.loadingProgress)
+                loadingBarC.displayProgress += loadingBarC.displayProgressDelta / FAST_SPEED_DIVISOR;
+            else
+                loadingBarC.displayProgress += loadingBarC.displayProgressDelta / SLOW_SPEED_DIVISOR;
+            if (loadingBarC.displayProgress > 1.0f)
+                loadingBarC.displayProgress = 1.0f;
+        } else
+            loadingBarC.displayProgress = 1.0f;
+
+        ScaleComponent scaleC = scaleM.get(e);
+        if (scaleC != null)
+            scaleC.x = loadingBarC.displayProgress;
+        if (loadingBarC.displayProgress >= 1.0f && loadingBarC.loadingProgress >= 1.0f) {
+            GameState nextState = loadingBarC.nextState;
+            world.getSystem(GameStateManager.class).signal(nextState);
             loadingBarM.remove(e);
         }
     }

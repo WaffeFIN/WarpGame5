@@ -7,7 +7,6 @@ package wg.games.warp.systems;
 
 import com.artemis.Aspect;
 import com.artemis.systems.IntervalIteratingSystem;
-import wg.games.warp.WarpGame;
 import wg.games.warp.components.LogicComponent;
 
 /**
@@ -16,8 +15,8 @@ import wg.games.warp.components.LogicComponent;
  */
 public class LogicSystem extends IntervalIteratingSystem {
 
-    public LogicSystem() {
-        super(Aspect.all(LogicComponent.class), WarpGame.LOGIC_SYSTEM_INTERVAL / WarpGame.TICKRATE);
+    public LogicSystem(float interval) {
+        super(Aspect.all(LogicComponent.class), interval);
     }
 
     @Override

@@ -11,6 +11,6 @@ package wg.games.warp.components.ai;
  */
 public class PathFindingComponent {
 
-    public float destinationX = 0.0f;
-    public float destinationY = 0.0f;
+    public float targetX = 0.0f;
+    public float targetY = 0.0f;
 }

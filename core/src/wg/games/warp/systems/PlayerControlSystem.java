@@ -7,7 +7,7 @@ package wg.games.warp.systems;
 
 import com.artemis.Aspect;
 import com.artemis.systems.IteratingSystem;
-import wg.games.warp.components.InputControlledComponent;
+import wg.games.warp.components.LocallyControlledComponent;
 import wg.games.warp.components.PhysicsComponent;
 
 /**
@@ -17,7 +17,7 @@ import wg.games.warp.components.PhysicsComponent;
 public class PlayerControlSystem extends IteratingSystem {
 
     public PlayerControlSystem() {
-        super(Aspect.all(InputControlledComponent.class, PhysicsComponent.class));
+        super(Aspect.all(LocallyControlledComponent.class, PhysicsComponent.class));
     }
 
     @Override
