@@ -7,21 +7,24 @@
 package wg.games.warp.util;
 
 /**
-
- @author Walter
+ * 
+ * @author Walter
  */
 public class Pair<X, Y> {
 
-    public X x;
-    public Y y;
+	public X x;
+	public Y y;
 
-    public Pair(X x, Y y) {
-        this.x = x;
-        this.y = y;
-    }
+	public Pair() {
+	}
 
-    public void set(X x, Y y) {
-        this.x = x;
-        this.y = y;
-    }
+	public Pair(X x, Y y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public void set(X x, Y y) {
+		this.x = x;
+		this.y = y;
+	}
 }

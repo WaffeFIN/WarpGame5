@@ -22,8 +22,8 @@ class InputMapper {
     private InputEvent scrollDown;
 
     public InputMapper() {
-        this.keyboardMap = new HashMap();
-        this.mouseMap = new HashMap();
+        this.keyboardMap = new HashMap<Integer, InputEvent>();
+        this.mouseMap = new HashMap<Integer, InputEvent>();
         init();
     }
 

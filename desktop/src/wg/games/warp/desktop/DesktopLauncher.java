@@ -7,7 +7,7 @@ import wg.games.warp.WarpGame;
 public class DesktopLauncher {
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
-    public static void main(String[] arg) {
+    public static void main(String[] arg) {    	
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.foregroundFPS = WarpGame.TICKRATE;
         config.width = WarpGame.DISPLAY_WIDTH;

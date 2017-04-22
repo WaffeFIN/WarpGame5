@@ -16,58 +16,53 @@ import java.io.Reader;
  */
 public class LevelLoaderSystem extends BaseSystem {
 
-    private Campaign currentCampaign;
-    private Level currentLevel;
-    private Level nextLevel;
+	private Campaign currentCampaign;
+	private Level currentLevel;
+	private Level nextLevel;
 
-    public LevelLoaderSystem() {
-        super();
-    }    
+	public LevelLoaderSystem() {
+		super();
+	}
 
-    public void setCampaign(Campaign campaign) {
-        if (campaign == null) {
-            return;
-        }
-        currentCampaign = campaign;
-        nextLevel = campaign.next();
-    }
+	public void setCampaign(Campaign campaign) {
+		if (campaign == null) {
+			return;
+		}
+		currentCampaign = campaign;
+		nextLevel = campaign.next();
+	}
 
-    public boolean loadLevel(Level level) {
-        if (level == null || level.data == null || !level.data.exists()) {
-            return false;
-        }
+	public boolean loadLevel() {
+		return loadLevel(currentLevel);
+	}
 
-        int b;
-        try {
-            Reader reader = level.data.reader();
-            while ((b = reader.read()) != -1) {
-                //read bytes, create entities
-            }
-            reader.close();
-        } catch (IOException ex) {
-            return false;
-        }
-        //initialize level timers, variables
-        return true;
-    }
+	public boolean loadLevel(Level level) {
+		if (level == null || level.data == null || !level.data.exists()) {
+			return false;
+		}
 
-    public boolean loadNextLevel() {
-        clearLevel();
-        currentLevel = nextLevel;
-        nextLevel = currentCampaign.next();
-        return loadLevel(nextLevel);
-    }
+		try {
+			Reader reader = level.data.reader();
+			while (true) {
+				int b = reader.read();
+				if (b == -1)
+					break;
+			}
+			reader.close();
+		} catch (IOException ex) {
+			return false;
+		}
+		// initialize level timers, variables
+		return true;
+	}
 
-    public boolean restartLevel() {
-        clearLevel();
-        return loadLevel(currentLevel);
-    }
+	public boolean loadNextLevel() {
+		currentLevel = nextLevel;
+		nextLevel = currentCampaign.next();
+		return loadLevel(nextLevel);
+	}
 
-    public void clearLevel() {
-        //clear all current level entities
-    }
-
-    @Override
-    protected void processSystem() {
-    }
+	@Override
+	protected void processSystem() {
+	}
 }

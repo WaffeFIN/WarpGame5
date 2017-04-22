@@ -7,28 +7,34 @@ package wg.games.warp.systems.levels;
 
 /**
  * Contains levels. Campaign files contains metadata and paths to each level in
- * the correct order. Data-only
+ * the correct order.
  *
  * @author Walter
  */
 public class Campaign {
 
-    public String campaignName;
+	private final Level[] levels;
+	private int index;
 
-    private final Level[] levels;
-    private int index;
+	public CampaignMetaData metaData;
 
-    public Campaign(Level[] levels) {
-        this.levels = levels;
-        index = 0;
-    }
+	public Campaign(Level[] levels) {
+		this.levels = levels;
+		index = 0;
+		initMetaData();
+	}
 
-    public boolean hasNext() {
-        return (index < levels.length);
-    }
+	private void initMetaData() {
+		metaData = new CampaignMetaData();
+		// get authors sorted by occurrence
+	}
 
-    public Level next() {
-        return (hasNext() ? levels[index++] : null);
-    }
+	public boolean hasNext() {
+		return (index < levels.length);
+	}
+
+	public Level next() {
+		return (hasNext() ? levels[index++] : null);
+	}
 
 }

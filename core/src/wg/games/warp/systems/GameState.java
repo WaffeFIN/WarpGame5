@@ -7,32 +7,33 @@
 package wg.games.warp.systems;
 
 /**
-
- @author waxwax
+ * 
+ * @author waxwax
  */
 public enum GameState {
 
-    /**
-     Start loading assets. Continue when menu assets are loaded.
-     *//**
-     Start loading assets. Continue when menu assets are loaded.
-     */
-    INTRO,
-    /**
-     Display menu buttons. No physics, AI or logic entities.
-     */
-    MENU,
-    /**
-     An in-between state where the level is loaded through a LevelLoader. Note
-     that the game is frozen until level is fully loaded.
-     */
-    LOAD_GAME,
-    /**
-     In-game.
-     */
-    GAME,
-    /**
-     Map maker / Level editor.
-     */
-    MAP_MAKER;
+	/**
+	 * Start loading assets. Continue when menu assets are loaded.
+	 */
+	/**
+	 * Start loading assets. Continue when menu assets are loaded.
+	 */
+	INTRO,
+	/**
+	 * Display menu buttons. No physics, AI or logic entities.
+	 */
+	MENU,
+	/**
+	 * An in-between state where the level is loaded through a LevelLoader. Note
+	 * that the game is frozen until level is fully loaded.
+	 */
+	LOAD_GAME,
+	/**
+	 * In-game.
+	 */
+	GAME,
+	/**
+	 * Map maker / Level editor.
+	 */
+	MAP_MAKER;
 }

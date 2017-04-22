@@ -36,7 +36,7 @@ class DesktopInputProcessor implements BufferedInputProcessor {
 
         mapper = new InputMapper();
 
-        mouse = new Pair(0, 0);
+        mouse = new Pair<Integer, Integer>(0, 0);
     }
 
     @Override

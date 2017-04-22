@@ -15,6 +15,6 @@ import com.artemis.Component;
  */
 public class WeaponComponent extends Component {
     
-    private Archetype primaryBulletArchetype;
-    private Archetype secondaryBulletArchetype;
+    public Archetype primaryBulletArchetype;
+    public Archetype secondaryBulletArchetype;
 }

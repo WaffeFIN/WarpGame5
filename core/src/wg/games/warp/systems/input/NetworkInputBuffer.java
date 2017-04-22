@@ -29,7 +29,7 @@ public class NetworkInputBuffer implements InputEventBuffer{
         buffer = new InputEvent[BUFFER_SIZE];
         bufferIndex = 0;
 
-        mouse = new Pair(0, 0);
+        mouse = new Pair<Integer, Integer>(0, 0);
     }
 
     @Override

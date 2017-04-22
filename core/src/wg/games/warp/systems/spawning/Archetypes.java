@@ -9,14 +9,16 @@ package wg.games.warp.systems.spawning;
 import com.artemis.Archetype;
 import com.artemis.ArchetypeBuilder;
 import com.artemis.World;
+
+import wg.games.warp.components.LoadingComponent;
 import wg.games.warp.components.PositionComponent;
 import wg.games.warp.components.ScaleComponent;
-import wg.games.warp.components.graphics.RenderableComponent;
 import wg.games.warp.components.SizeComponent;
 import wg.games.warp.components.graphics.BackgroundComponent;
 import wg.games.warp.components.graphics.ColorComponent;
 import wg.games.warp.components.graphics.HUDComponent;
 import wg.games.warp.components.graphics.LoadingBarComponent;
+import wg.games.warp.components.graphics.RenderableComponent;
 import wg.games.warp.components.graphics.TextureComponent;
 import wg.games.warp.components.ui.ClickableComponent;
 
@@ -46,6 +48,7 @@ public class Archetypes {
         loadingBar = new ArchetypeBuilder(hud)
                 .add(ScaleComponent.class)
                 .add(ColorComponent.class)
+                .add(LoadingComponent.class)
                 .add(LoadingBarComponent.class)
                 .build(world);
         menuButton = new ArchetypeBuilder(defaultArchetype)

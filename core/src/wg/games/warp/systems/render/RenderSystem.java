@@ -19,55 +19,51 @@ import wg.games.warp.components.graphics.RenderableComponent;
 import wg.games.warp.components.graphics.TextureComponent;
 
 /**
-
- @author Walter
+ * 
+ * @author Walter
  */
 public abstract class RenderSystem extends IteratingSystem {
 
-    private ComponentMapper<PositionComponent> positionM;
-    private ComponentMapper<SizeComponent> sizeM;
-    private ComponentMapper<ScaleComponent> scaleM;
-    private ComponentMapper<TextureComponent> textureM;
-    private ComponentMapper<ColorComponent> colorM;
+	private ComponentMapper<PositionComponent> positionM;
+	private ComponentMapper<SizeComponent> sizeM;
+	private ComponentMapper<ScaleComponent> scaleM;
+	private ComponentMapper<TextureComponent> textureM;
+	private ComponentMapper<ColorComponent> colorM;
 
-    private final SpriteBatch batch;
-    private final Color defaultColor;
+	private final SpriteBatch batch;
+	private static final Color defaultColor = Color.WHITE;
 
-    public RenderSystem(SpriteBatch batch, Builder aspect) {
-        super(aspect.all(RenderableComponent.class, PositionComponent.class, SizeComponent.class)
-                    .one(TextureComponent.class));
-        this.batch = batch;
-        this.defaultColor = new Color(Color.WHITE);
-    }
+	public RenderSystem(SpriteBatch batch, Builder aspect) {
+		super(aspect.all(RenderableComponent.class, PositionComponent.class, SizeComponent.class)
+				.one(TextureComponent.class));
+		this.batch = batch;
+	}
 
-    @Override
-    protected void process(int e) {
-        PositionComponent positionC = positionM.get(e);
+	@Override
+	protected void process(int e) {
+		PositionComponent positionC = positionM.get(e);
 
-        SizeComponent sizeC = sizeM.get(e);
+		SizeComponent sizeC = sizeM.get(e);
 
-        float xScale = 1.0f;
-        float yScale = 1.0f;
-        ScaleComponent scaleC = scaleM.get(e);
-        if (scaleC != null) {
-            xScale = scaleC.x;
-            yScale = scaleC.y;
-        }
-        
-        boolean colorHasChanged = false;
-        ColorComponent colorC = colorM.get(e);
-        if (colorC != null && colorC.color != null) {
-            batch.setColor(colorC.color);
-            colorHasChanged = true;
-        }
+		float xScale = 1.0f;
+		float yScale = 1.0f;
+		ScaleComponent scaleC = scaleM.get(e);
+		if (scaleC != null) {
+			xScale = scaleC.x;
+			yScale = scaleC.y;
+		}
 
-        TextureComponent textureC = textureM.get(e);                
-        if (textureC.texture != null)
-            batch.draw(textureC.texture, positionC.x, positionC.y, sizeC.w * xScale, sizeC.h * yScale);
-            
-        
-        if (colorHasChanged)
-            batch.setColor(defaultColor);
-    }
+		boolean colorHasChanged;
+		ColorComponent colorC = colorM.get(e);
+		if (colorHasChanged = (colorC != null && colorC.color != null))
+			batch.setColor(colorC.color);
+
+		TextureComponent textureC = textureM.get(e);
+		if (textureC.texture != null)
+			batch.draw(textureC.texture, positionC.x, positionC.y, sizeC.w * xScale, sizeC.h * yScale);
+
+		if (colorHasChanged)
+			batch.setColor(defaultColor);
+	}
 
 }

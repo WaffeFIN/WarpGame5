@@ -12,27 +12,30 @@ import com.badlogic.gdx.graphics.Color;
 
  @author Walter
  */
-public class MetaData {
+public class LevelMetaData {
 
     /** Bronze, silver, gold, (hidden) platinum */
     private static final int MEDAL_TYPES = 4;
+    private static final int PARAMS = 4;
 
-    public int levelVersion;
-    public int mapMakerVersion;
+    private int levelVersion;
+    private int mapMakerVersion;
 
-    public String levelName;
-    public String authorName;
-    public Color background;
+    private String name;
+    private String author;
+    private Color background;
     /** Default inventory and more. */
-    public int stateFlag;
+    private int stateFlags;
     /** Miscellaneous stuff. */
-    public int[] levelParams;
+    private int[] params;
 
     /** In milliseconds. */
-    public int[] parTimes;
-    public int[] parPortals;
+    private int[] parTimes;
+    private int[] parPortals;
 
-    public MetaData() {
+    public LevelMetaData() {
+    	params = new int[PARAMS];
+    	
         parTimes = new int[MEDAL_TYPES];
         parPortals = new int[MEDAL_TYPES];
     }

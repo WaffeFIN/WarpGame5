@@ -15,8 +15,6 @@ import wg.games.warp.systems.GameState;
  */
 public class LoadingBarComponent extends Component {
 
-    public float loadingProgress = 0.0f;
     public float displayProgress = 0.0f;
     public float displayProgressDelta = 0.0f;
-    public GameState nextState = GameState.MENU;
 }

@@ -17,10 +17,10 @@ import com.badlogic.gdx.files.FileHandle;
 public class Level {
 
     public final FileHandle data;
-    public final MetaData metaData;
+    public final LevelMetaData metaData;
 
     public Level(FileHandle data) {
         this.data = data;
-        this.metaData = new MetaData();
+        this.metaData = new LevelMetaData();
     }
 }

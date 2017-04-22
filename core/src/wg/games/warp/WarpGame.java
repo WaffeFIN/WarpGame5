@@ -39,10 +39,10 @@ public class WarpGame extends ApplicationAdapter {
 
     //Versions
     /** YEAR * 2^19 + MONTH * 2^15 + DAY * 2^10 + BUILD. */
-    public static final int VERSION = (2016 << 19) + (8 << 15) + (9 << 10) + 1;
-    public static final int MAPMAKER_VERSION = 0;
-    /** Oldest supported mapmaker version. */
-    public static final int MAPMAKER_LEGACY_SUPPORT_VERSION = 0;
+    public static final int VERSION = (2016 << 19) + (8 << 15) + (13 << 10) + 1;
+    public static final int MAP_MAKER_VERSION = 0;
+    /** Oldest supported map maker version. */
+    public static final int MAP_MAKER_LEGACY_SUPPORT_VERSION = 0;
 
     //Ticks, intervals
     public static final int TICKRATE = 144;
@@ -64,7 +64,7 @@ public class WarpGame extends ApplicationAdapter {
                 + "\nInitializing...");
         
         Box2D.init();
-        engine = new World(new Vector2(0.0f, 0.0f), true); //gravity is assigned later
+        engine = new World(new Vector2(0.0f, 0.0f), true); //gravity is assigned in the PhysicsSystem
 
         batch = new SpriteBatch();
         OrthographicCamera cam = new OrthographicCamera();

@@ -21,7 +21,7 @@ class EntityData {
     
     public EntityData(Archetype archetype) {
         this.archetype = archetype;
-        this.defaultComponentValues = new Bag();
+        this.defaultComponentValues = new Bag<Component>();
     }
 
     /**
